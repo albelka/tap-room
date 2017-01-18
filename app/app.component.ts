@@ -10,6 +10,7 @@ import { Component } from '@angular/core';
       <p>{{currentKeg.brand}}</p>
       <p>\${{currentKeg.price}}.00</p>
       <p>{{currentKeg.alcoholContent}} abv</p>
+      <p>Pints left: {{currentKeg.pintsLeft}} <button (click)="sellPint(currentKeg)">Pint sold</button></p>
        <button (click)="editKeg(currentKeg)">Edit</button>
     </div>
     <hr>
@@ -55,9 +56,12 @@ export class AppComponent {
   editKeg(clickedKeg) {
     this.selectedKeg = clickedKeg;
   }
+  sellPint(currentKeg) {
+    currentKeg.pintsLeft -= 1; 
+  }
 }
 
 export class Keg {
-  public pints: number = 124;
+  public pintsLeft: number = 124;
   constructor(public name: string, public brand: string, public price: number, public alcoholContent: string) {}
 }
