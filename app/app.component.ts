@@ -5,8 +5,9 @@ import { Component } from '@angular/core';
   template: `
   <div class="container" (click)="showHeader()">
     <h1>Portland Taproom</h1>
-    <div [class]= "priceColor(currentKeg)" *ngFor="let currentKeg of kegs">
+    <div class="keg" [class]= "priceColor(currentKeg)"  *ngFor="let currentKeg of kegs">
       <h4>{{currentKeg.name}}</h4>
+      <img *ngIf="showBender(currentKeg)" src="../resources/images/bender.png">
       <p>{{currentKeg.brand}}</p>
       <p>\${{currentKeg.price}}.00</p>
       <p>{{currentKeg.alcoholContent}} abv</p>
@@ -90,6 +91,12 @@ export class AppComponent {
       return "bg-warning";
     } else {
       return "bg-info";
+    }
+  }
+
+  showBender(currentKeg) {
+    if (currentKeg.alcoholContent >= "7") {
+      return true;
     }
   }
 }
