@@ -5,7 +5,7 @@ import { Keg } from './keg.model';
   selector: 'keg-list',
   template: `
   <h1>Portland Taproom</h1>
-  <div class="keg" [class]= "priceColor(currentKeg)"  *ngFor="let currentKeg of childKegList">
+  <div class="well" [class]= "priceColor(currentKeg)"  *ngFor="let currentKeg of childKegList">
     <h4>{{currentKeg.name}}</h4>
     <img *ngIf="showBender(currentKeg)" src="../resources/images/bender.png">
     <p>{{currentKeg.brand}}</p>

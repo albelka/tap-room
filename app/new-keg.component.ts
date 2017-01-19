@@ -5,21 +5,21 @@ import { Keg } from './keg.model';
   selector: "new-keg",
   template: `
     <h1>New Keg</h1>
-    <div>
+    <div class="form-group">
       <label>Beer Name:</label>
-      <input #newName>
+      <input #newName class="form-control">
     </div>
-    <div>
+    <div class="form-group">
       <label>Brewer:</label>
-      <input #newBrand>
+      <input #newBrand class="form-control">
     </div>
-    <div>
+    <div class="form-group">
       <label>Price:</label>
-      <input #newPrice>
+      <input #newPrice class="form-control">
     </div>
-    <div>
+    <div class="form-group">
       <label>abv:</label>
-      <input #newAlcoholContent>
+      <input #newAlcoholContent class="form-control">
     </div>
     <button class="btn btn-warning" (click)="submitForm(newName.value, newBrand.value, newPrice.value, newAlcoholContent.value); newName.value=''; newBrand.value=''; newPrice.value=''; newAlcoholContent.value='';">Add</button>
   `
