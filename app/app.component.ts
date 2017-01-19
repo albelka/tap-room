@@ -4,9 +4,13 @@ import { Keg } from './keg.model';
 @Component({
   selector: 'app-root',
   template: `
-  <div class="container" >
+  <div class="container" (click)="showHeader()" >
 
   <keg-list [childKegList]="masterKegList" (clickSender)="editKeg($event)" (pintClickSender)="sellPint($event)"></keg-list>
+
+  <div *ngIf="pintsLow">
+  <h3>These kegs are low!</h3>
+  </div>
 
   <pint-control [childKegList]="masterKegList" (clickSender)="sellPint($event)"></pint-control>
 
@@ -19,10 +23,10 @@ import { Keg } from './keg.model';
 
 export class AppComponent {
   masterKegList: Keg[] = [
-    new Keg("7", "Upright", 7.00, 6.5),
-    new Keg("Sleigher", "Ninkasi", 6.00, 7),
-    new Keg("Polygamy Porter", "Uinta", 5.00, 3.2),
-    new Keg("PBR", "Pabst", 1.00, 4.2)
+    new Keg("7", "Upright", 7, 6.5),
+    new Keg("Sleigher", "Ninkasi", 6, 7),
+    new Keg("Polygamy Porter", "Uinta", 5, 3.2),
+    new Keg("PBR", "Pabst", 1, 4.2)
 
   ];
   selectedKeg = null;
@@ -42,5 +46,13 @@ export class AppComponent {
 
   sellPint(currentKeg) {
     currentKeg.pintsLeft -= 1;
+  }
+
+  showHeader() {
+    for(let keg of this.masterKegList) {
+      if(keg.pintsLeft <= 121){
+        this.pintsLow = true;
+      }
+    }
   }
 }

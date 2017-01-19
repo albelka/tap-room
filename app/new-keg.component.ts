@@ -15,11 +15,11 @@ import { Keg } from './keg.model';
     </div>
     <div class="form-group">
       <label>Price:</label>
-      <input #newPrice class="form-control">
+      <input type="number" #newPrice class="form-control">
     </div>
     <div class="form-group">
       <label>abv:</label>
-      <input #newAlcoholContent class="form-control">
+      <input type="number" #newAlcoholContent class="form-control">
     </div>
     <button class="btn btn-warning" (click)="submitForm(newName.value, newBrand.value, newPrice.value, newAlcoholContent.value); newName.value=''; newBrand.value=''; newPrice.value=''; newAlcoholContent.value='';">Add</button>
   `
@@ -30,6 +30,7 @@ export class NewKegComponent {
 
   submitForm(name: string, brand: string, price: number, alcoholContent: number) {
     var newKegToAdd: Keg = new Keg(name, brand, price, alcoholContent);
+    console.log(newKegToAdd.price);
     this.newKegSender.emit(newKegToAdd);
   }
 

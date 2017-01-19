@@ -15,7 +15,7 @@ import { Keg } from './keg.model';
     <h4>{{currentKeg.name}}</h4>
     <img *ngIf="showBender(currentKeg)" src="../resources/images/bender.png">
     <p>{{currentKeg.brand}}</p>
-    <p>\${{currentKeg.price.toFixed(2)}}</p>
+    <p>\${{currentKeg.price | number: '1.2'}}</p>
     <p>{{currentKeg.alcoholContent}} abv</p>
     <p>Pints left: {{currentKeg.pintsLeft}}
 

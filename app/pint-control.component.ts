@@ -4,13 +4,14 @@ import { Keg } from './keg.model';
 @Component({
   selector: 'pint-control',
   template: `
-  <div *ngIf="pintsLow" (mousemove)="showHeader()">
-    <h3>These kegs are low!</h3>
-  </div>
+  <div class="container">
+
     <div *ngFor="let currentKeg of childKegList">
       <div *ngIf="currentKeg.pintsLeft <= 122">
         <p>{{currentKeg.name}} has {{currentKeg.pintsLeft}}pints left.</p>
+
       </div>
+    </div>
     </div>
   `
 })
@@ -24,13 +25,5 @@ export class PintControlComponent {
 
   pintSoldButtonHasBeenClicked(kegToEdit: Keg) {
     this.clickSender.emit(kegToEdit);
-  }
-
-  showHeader() {
-    for(let keg of this.childKegList) {
-      if(keg.pintsLeft <= 10){
-        this.pintsLow = true;
-      }
-    }
   }
 }
