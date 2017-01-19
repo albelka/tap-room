@@ -19,6 +19,7 @@ import { Keg } from './keg.model';
 
     <hr>
     <edit-keg [childSelectedKeg]="selectedKeg" (doneButtonClickedSender)="finishedEditing()"></edit-keg>
+    <new-keg (newKegSender)="addKeg($event)"></new-keg>
   </div>
   `
 })
@@ -31,13 +32,16 @@ export class AppComponent {
     new Keg("PBR", "Pabst", 1, "4.2%")
 
   ];
+  selectedKeg = null;
+  pintsLow = false;
+
+  editKeg(clickedKeg) {
+    this.selectedKeg = clickedKeg;
+  }
 
   finishedEditing() {
     this.selectedKeg = null;
   }
-
-  selectedKeg = null;
-  pintsLow = false;
 
   showHeader() {
     for(let keg of this.masterKegList) {
@@ -47,9 +51,10 @@ export class AppComponent {
     }
   }
 
-  editKeg(clickedKeg) {
-    this.selectedKeg = clickedKeg;
+  addKeg(newKegFromChild: Keg) {
+    this.masterKegList.push(newKegFromChild);
   }
+
 
   sellPint(currentKeg) {
     currentKeg.pintsLeft -= 1;
