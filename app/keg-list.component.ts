@@ -5,7 +5,13 @@ import { Keg } from './keg.model';
   selector: 'keg-list',
   template: `
   <h1>Portland Taproom</h1>
-  <div class="well" [class]= "priceColor(currentKeg)"  *ngFor="let currentKeg of childKegList">
+
+  <select (change)="onChange($event.target.value)">
+    <option value="allKegs" selected="selected">All Beers</option>
+    <option value="onSale">Beers on Sale</option>
+  </select>
+
+  <div class="well" [class]= "priceColor(currentKeg)"  *ngFor="let currentKeg of childKegList | sale:filterByOnSale">
     <h4>{{currentKeg.name}}</h4>
     <img *ngIf="showBender(currentKeg)" src="../resources/images/bender.png">
     <p>{{currentKeg.brand}}</p>
@@ -13,6 +19,7 @@ import { Keg } from './keg.model';
     <p>{{currentKeg.alcoholContent}} abv</p>
     <p>Pints left: {{currentKeg.pintsLeft}} <button (click)="pintSoldButtonHasBeenClicked(currentKeg)">Pint sold</button></p>
      <button (click)="editKegButtonHasBeenClicked(currentKeg)">Edit</button>
+     <button (click)="saleKegButtonHasBeenClicked(currentKeg)">Put on sale</button>
   </div>
   <hr>
 
@@ -23,6 +30,14 @@ export class KegListComponent {
   @Input() childKegList: Keg[];
   @Output() clickSender = new EventEmitter();
   @Output() pintClickSender = new EventEmitter();
+  @Output() saleClickSender = new EventEmitter();
+
+  filterByOnSale: string = "allKegs";
+
+  onChange(optionFromMenu) {
+    this.filterByOnSale = optionFromMenu;
+    console.log(this.filterByOnSale);
+  }
 
   priceColor(currentKeg) {
     if (currentKeg.price >= 7) {
@@ -35,7 +50,7 @@ export class KegListComponent {
   }
 
   showBender(currentKeg) {
-    if (currentKeg.alcoholContent >= "7") {
+    if (currentKeg.alcoholContent >= 7) {
       return true;
     }
   }
@@ -45,6 +60,10 @@ export class KegListComponent {
   }
 
   pintSoldButtonHasBeenClicked(kegToEdit: Keg) {
-    this.pintClickSender.emit(kegToEdit)
+    this.pintClickSender.emit(kegToEdit);
+  }
+
+  saleKegButtonHasBeenClicked(kegToEdit: Keg) {
+    this.saleClickSender.emit(kegToEdit);
   }
 }

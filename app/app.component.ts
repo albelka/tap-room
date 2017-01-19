@@ -6,11 +6,9 @@ import { Keg } from './keg.model';
   template: `
   <div class="container" >
 
-  <keg-list [childKegList]="masterKegList" (clickSender)="editKeg($event)" (pintClickSender)="sellPint($event)"></keg-list>
+  <keg-list [childKegList]="masterKegList" (clickSender)="editKeg($event)" (pintClickSender)="sellPint($event)" (saleClickSender)="putOnSale($event)"></keg-list>
 
   <pint-control [childKegList]="masterKegList" (clickSender)="sellPint($event)"></pint-control>
-
-  <hr>
 
   <edit-keg [childSelectedKeg]="selectedKeg" (doneButtonClickedSender)="finishedEditing()"></edit-keg>
 
@@ -21,10 +19,10 @@ import { Keg } from './keg.model';
 
 export class AppComponent {
   masterKegList: Keg[] = [
-    new Keg("7", "Upright", 7, "6.5%"),
-    new Keg("Sleigher", "Ninkasi", 6, "7%"),
-    new Keg("Polygamy Porter", "Uinta", 5, "3.2%"),
-    new Keg("PBR", "Pabst", 1, "4.2%")
+    new Keg("7", "Upright", 7, 6.5),
+    new Keg("Sleigher", "Ninkasi", 6, 7),
+    new Keg("Polygamy Porter", "Uinta", 5, 3.2),
+    new Keg("PBR", "Pabst", 1, 4.2)
 
   ];
   selectedKeg = null;
@@ -38,13 +36,17 @@ export class AppComponent {
     this.selectedKeg = null;
   }
 
-
-
   addKeg(newKegFromChild: Keg) {
     this.masterKegList.push(newKegFromChild);
   }
 
   sellPint(currentKeg) {
     currentKeg.pintsLeft -= 1;
+  }
+
+  putOnSale(currentKeg) {
+    currentKeg.onSale = true;
+    console.log("log " + currentKeg.onSale);
+    console.log("keg " + currentKeg.name);
   }
 }

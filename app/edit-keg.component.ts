@@ -7,7 +7,7 @@ import { Keg } from './keg.model';
   <div>
     <div *ngIf="childSelectedKeg">
       <h3>{{childSelectedKeg.name}}</h3>
-      <p>Pints left: {{childSelectedKeg.pints}}</p>
+      <p>Pints left: {{childSelectedKeg.pintsLeft}}</p>
       <h3>Edit keg</h3>
       <div class="form-group">
         <label>Edit keg name:</label>
@@ -23,7 +23,7 @@ import { Keg } from './keg.model';
       </div>
       <div class="form-group">
         <label>Edit abv:</label>
-        <input [(ngModel)]="childSelectedKeg.alcoholContent" [ngModelOptions]="{standalone: true}" class="form-control">
+        <input type="number" [(ngModel)]="childSelectedKeg.alcoholContent" [ngModelOptions]="{standalone: true}" class="form-control">
       </div>
       <button (click)="doneButtonClicked()" class="btn">Done editing</button>
     </div>

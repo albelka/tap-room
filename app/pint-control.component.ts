@@ -28,7 +28,7 @@ export class PintControlComponent {
 
   showHeader() {
     for(let keg of this.childKegList) {
-      if(keg.pintsLeft <= 122){
+      if(keg.pintsLeft <= 10){
         this.pintsLow = true;
       }
     }
