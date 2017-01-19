@@ -19,7 +19,7 @@ import { Keg } from './keg.model';
     <p>{{currentKeg.alcoholContent}} abv</p>
     <p>Pints left: {{currentKeg.pintsLeft}}
 
-    <button (click)="pintSoldButtonHasBeenClicked(currentKeg)">Pint sold</button></p>
+    <button (click)="pintSoldButtonHasBeenClicked(currentKeg)">Pint sold</button><button (click)="growlerSoldButtonHasBeenClicked(currentKeg)">64 oz growler sold</button></p>
      <button (click)="editKegButtonHasBeenClicked(currentKeg)">Edit</button>
      <br>
      <span>On sale</span>
@@ -35,6 +35,8 @@ export class KegListComponent {
   @Input() childKegList: Keg[];
   @Output() clickSender = new EventEmitter();
   @Output() pintClickSender = new EventEmitter();
+  @Output() growlerClickSender = new EventEmitter();
+
   @Output() saleClickSender = new EventEmitter();
 
   filterByOnSale: string = "allKegs";
@@ -65,6 +67,10 @@ export class KegListComponent {
 
   pintSoldButtonHasBeenClicked(kegToEdit: Keg) {
     this.pintClickSender.emit(kegToEdit);
+  }
+
+  growlerSoldButtonHasBeenClicked(kegToEdit: Keg) {
+    this.growlerClickSender.emit(kegToEdit);
   }
 
   saleKegButtonHasBeenClicked(kegToEdit: Keg) {

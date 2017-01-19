@@ -19,11 +19,8 @@ import { Keg } from './keg.model';
 export class PintControlComponent {
   @Input() childKegList: Keg[];
   @Output() clickSender = new EventEmitter();
+  @Output() growlerClickSender = new EventEmitter();
 
   selectedKeg = null;
   pintsLow = false;
-
-  pintSoldButtonHasBeenClicked(kegToEdit: Keg) {
-    this.clickSender.emit(kegToEdit);
-  }
 }

@@ -6,13 +6,13 @@ import { Keg } from './keg.model';
   template: `
   <div class="container" (click)="showHeader()" >
 
-  <keg-list [childKegList]="masterKegList" (clickSender)="editKeg($event)" (pintClickSender)="sellPint($event)"></keg-list>
+  <keg-list [childKegList]="masterKegList" (clickSender)="editKeg($event)" (pintClickSender)="sellPint($event)" (growlerClickSender)="sellGrowler($event)"></keg-list>
 
   <div *ngIf="pintsLow">
   <h3>These kegs are low!</h3>
   </div>
 
-  <pint-control [childKegList]="masterKegList" (clickSender)="sellPint($event)"></pint-control>
+  <pint-control [childKegList]="masterKegList"  ></pint-control>
 
   <edit-keg [childSelectedKeg]="selectedKeg" (doneButtonClickedSender)="finishedEditing()"></edit-keg>
 
@@ -46,6 +46,10 @@ export class AppComponent {
 
   sellPint(currentKeg) {
     currentKeg.pintsLeft -= 1;
+  }
+
+  sellGrowler(currentKeg) {
+    currentKeg.pintsLeft -= 4;
   }
 
   showHeader() {
