@@ -6,7 +6,7 @@ import { Keg } from './keg.model';
   template: `
   <div class="container" >
 
-  <keg-list [childKegList]="masterKegList" (clickSender)="editKeg($event)" (pintClickSender)="sellPint($event)" (saleClickSender)="putOnSale($event)"></keg-list>
+  <keg-list [childKegList]="masterKegList" (clickSender)="editKeg($event)" (pintClickSender)="sellPint($event)"></keg-list>
 
   <pint-control [childKegList]="masterKegList" (clickSender)="sellPint($event)"></pint-control>
 
@@ -19,10 +19,10 @@ import { Keg } from './keg.model';
 
 export class AppComponent {
   masterKegList: Keg[] = [
-    new Keg("7", "Upright", 7, 6.5),
-    new Keg("Sleigher", "Ninkasi", 6, 7),
-    new Keg("Polygamy Porter", "Uinta", 5, 3.2),
-    new Keg("PBR", "Pabst", 1, 4.2)
+    new Keg("7", "Upright", 7.00, 6.5),
+    new Keg("Sleigher", "Ninkasi", 6.00, 7),
+    new Keg("Polygamy Porter", "Uinta", 5.00, 3.2),
+    new Keg("PBR", "Pabst", 1.00, 4.2)
 
   ];
   selectedKeg = null;
@@ -42,11 +42,5 @@ export class AppComponent {
 
   sellPint(currentKeg) {
     currentKeg.pintsLeft -= 1;
-  }
-
-  putOnSale(currentKeg) {
-    currentKeg.onSale = true;
-    console.log("log " + currentKeg.onSale);
-    console.log("keg " + currentKeg.name);
   }
 }

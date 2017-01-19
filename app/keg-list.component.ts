@@ -15,11 +15,16 @@ import { Keg } from './keg.model';
     <h4>{{currentKeg.name}}</h4>
     <img *ngIf="showBender(currentKeg)" src="../resources/images/bender.png">
     <p>{{currentKeg.brand}}</p>
-    <p>\${{currentKeg.price}}.00</p>
+    <p>\${{currentKeg.price.toFixed(2)}}</p>
     <p>{{currentKeg.alcoholContent}} abv</p>
-    <p>Pints left: {{currentKeg.pintsLeft}} <button (click)="pintSoldButtonHasBeenClicked(currentKeg)">Pint sold</button></p>
+    <p>Pints left: {{currentKeg.pintsLeft}}
+
+    <button (click)="pintSoldButtonHasBeenClicked(currentKeg)">Pint sold</button></p>
      <button (click)="editKegButtonHasBeenClicked(currentKeg)">Edit</button>
-     <button (click)="saleKegButtonHasBeenClicked(currentKeg)">Put on sale</button>
+     <br>
+     <span>On sale</span>
+     <input *ngIf="currentKeg.onSale === true" type="checkbox" checked (click)="toggleOnSale(currentKeg, false)">
+     <input *ngIf="currentKeg.onSale === false" type="checkbox" (click)="toggleOnSale(currentKeg, true)">
   </div>
   <hr>
 
@@ -36,7 +41,6 @@ export class KegListComponent {
 
   onChange(optionFromMenu) {
     this.filterByOnSale = optionFromMenu;
-    console.log(this.filterByOnSale);
   }
 
   priceColor(currentKeg) {
@@ -65,5 +69,14 @@ export class KegListComponent {
 
   saleKegButtonHasBeenClicked(kegToEdit: Keg) {
     this.saleClickSender.emit(kegToEdit);
+  }
+
+  toggleOnSale(clickedKeg: Keg, setOnSale: boolean) {
+    clickedKeg.onSale = setOnSale;
+    if(clickedKeg.onSale === true) {
+      clickedKeg.price = clickedKeg.price / 2;
+    } else if(clickedKeg.onSale === false) {
+      clickedKeg.price = clickedKeg.price * 2;
+    }
   }
 }
