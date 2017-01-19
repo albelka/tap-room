@@ -7,6 +7,7 @@ import { EditKegComponent } from './edit-keg.component';
 import { NewKegComponent } from './new-keg.component';
 import { PintControlComponent } from './pint-control.component';
 import { PutOnSalePipe } from './put-on-sale.pipe';
+import { StylePipe } from './style.pipe';
 
 @NgModule({
   imports: [ BrowserModule,
@@ -16,7 +17,8 @@ import { PutOnSalePipe } from './put-on-sale.pipe';
                   EditKegComponent,
                   NewKegComponent,
                   PintControlComponent,
-                  PutOnSalePipe],
+                  PutOnSalePipe,
+                  StylePipe ],
   bootstrap:    [ AppComponent ]
 })
 

@@ -11,10 +11,21 @@ import { Keg } from './keg.model';
     <option value="onSale">Beers on Sale</option>
   </select>
 
-  <div class="well" [class]= "priceColor(currentKeg)"  *ngFor="let currentKeg of childKegList | sale:filterByOnSale">
+  <select (change)="styleChange($event.target.value)">
+    <option value="allBeers" selected="selected">All Styles</option>
+    <option value="IPA">IPA</option>
+    <option value="Lager">Lager</option>
+    <option value="Porter">Porter</option>
+    <option value="Winter Warmer">Winter Warmer</option>
+  </select>
+
+
+  <div class="well" [class]= "priceColor(currentKeg)"  *ngFor="let currentKeg of childKegList | sale:filterByOnSale | style:filterByStyle">
     <h4>{{currentKeg.name}}</h4>
     <img *ngIf="showBender(currentKeg)" src="../resources/images/bender.png">
+    <img *ngIf="currentKeg.onSale" src="../resources/images/sale.png">
     <p>{{currentKeg.brand}}</p>
+    <p>{{currentKeg.style}}</p>
     <p>\${{currentKeg.price | number: '1.2'}}</p>
     <p>{{currentKeg.alcoholContent}} abv</p>
     <p>Pints left: {{currentKeg.pintsLeft}}
@@ -40,9 +51,14 @@ export class KegListComponent {
   @Output() saleClickSender = new EventEmitter();
 
   filterByOnSale: string = "allKegs";
+  filterByStyle: string = "allBeers";
 
   onChange(optionFromMenu) {
     this.filterByOnSale = optionFromMenu;
+  }
+
+  styleChange(optionFromMenu) {
+    this.filterByStyle = optionFromMenu;
   }
 
   priceColor(currentKeg) {

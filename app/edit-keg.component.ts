@@ -18,6 +18,10 @@ import { Keg } from './keg.model';
         <input [(ngModel)]="childSelectedKeg.brand" [ngModelOptions]="{standalone: true}" class="form-control">
       </div>
       <div class="form-group">
+        <label>Edit style:</label>
+        <input [(ngModel)]="childSelectedKeg.style" [ngModelOptions]="{standalone: true}" class="form-control">
+      </div>
+      <div class="form-group">
         <label>Edit price:</label>
         <input [(ngModel)]="childSelectedKeg.price" [ngModelOptions]="{standalone: true}" class="form-control">
       </div>
