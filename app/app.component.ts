@@ -4,22 +4,17 @@ import { Keg } from './keg.model';
 @Component({
   selector: 'app-root',
   template: `
-  <div class="container" (click)="showHeader()">
+  <div class="container" >
 
-  <keg-list [childKegList]="masterKegList" (clickSender)="editKeg($event)"></keg-list>
+  <keg-list [childKegList]="masterKegList" (clickSender)="editKeg($event)" (pintClickSender)="sellPint($event)"></keg-list>
 
-  <div *ngIf="pintsLow">
-    <h3>These kegs are low!</h3>
-  </div>
-    <div *ngFor="let currentKeg of kegs">
-      <div *ngIf="currentKeg.pintsLeft <= 122">
-        <p>{{currentKeg.name}} has {{currentKeg.pintsLeft}}pints left.</p>
-      </div>
-    </div>
+  <pint-control [childKegList]="masterKegList" (clickSender)="sellPint($event)"></pint-control>
 
-    <hr>
-    <edit-keg [childSelectedKeg]="selectedKeg" (doneButtonClickedSender)="finishedEditing()"></edit-keg>
-    <new-keg (newKegSender)="addKeg($event)"></new-keg>
+  <hr>
+
+  <edit-keg [childSelectedKeg]="selectedKeg" (doneButtonClickedSender)="finishedEditing()"></edit-keg>
+
+  <new-keg (newKegSender)="addKeg($event)"></new-keg>
   </div>
   `
 })
@@ -43,18 +38,11 @@ export class AppComponent {
     this.selectedKeg = null;
   }
 
-  showHeader() {
-    for(let keg of this.masterKegList) {
-      if(keg.pintsLeft <= 122){
-        this.pintsLow = true;
-      }
-    }
-  }
+
 
   addKeg(newKegFromChild: Keg) {
     this.masterKegList.push(newKegFromChild);
   }
-
 
   sellPint(currentKeg) {
     currentKeg.pintsLeft -= 1;

@@ -11,7 +11,7 @@ import { Keg } from './keg.model';
     <p>{{currentKeg.brand}}</p>
     <p>\${{currentKeg.price}}.00</p>
     <p>{{currentKeg.alcoholContent}} abv</p>
-    <p>Pints left: {{currentKeg.pintsLeft}} <button (click)="sellPint(currentKeg)">Pint sold</button></p>
+    <p>Pints left: {{currentKeg.pintsLeft}} <button (click)="pintSoldButtonHasBeenClicked(currentKeg)">Pint sold</button></p>
      <button (click)="editKegButtonHasBeenClicked(currentKeg)">Edit</button>
   </div>
   <hr>
@@ -22,6 +22,7 @@ import { Keg } from './keg.model';
 export class KegListComponent {
   @Input() childKegList: Keg[];
   @Output() clickSender = new EventEmitter();
+  @Output() pintClickSender = new EventEmitter();
 
   priceColor(currentKeg) {
     if (currentKeg.price >= 7) {
@@ -41,5 +42,9 @@ export class KegListComponent {
 
   editKegButtonHasBeenClicked(kegToEdit: Keg) {
     this.clickSender.emit(kegToEdit);
+  }
+
+  pintSoldButtonHasBeenClicked(kegToEdit: Keg) {
+    this.pintClickSender.emit(kegToEdit)
   }
 }
