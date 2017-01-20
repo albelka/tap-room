@@ -7,7 +7,7 @@ import { Keg } from './keg.model';
   <div class="container">
 
     <div *ngFor="let currentKeg of childKegList">
-      <div *ngIf="currentKeg.pintsLeft <= 122">
+      <div *ngIf="currentKeg.pintsLeft <= 10">
         <p>{{currentKeg.name}} has {{currentKeg.pintsLeft}}pints left.</p>
 
       </div>

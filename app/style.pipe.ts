@@ -9,13 +9,11 @@ import { Keg } from './keg.model';
 export class StylePipe implements PipeTransform {
 
   transform(input: Keg[], filterByStyle) {
-    console.log(input);
     var output: Keg[] = [];
     if(filterByStyle === 'IPA'){
     for (var i = 0; i < input.length; i++) {
         if(input[i].style === 'IPA') {
           output.push(input[i]);
-          console.log(input[i]);
         }
       }
       return output;

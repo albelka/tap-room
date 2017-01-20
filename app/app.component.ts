@@ -45,16 +45,20 @@ export class AppComponent {
   }
 
   sellPint(currentKeg) {
-    currentKeg.pintsLeft -= 1;
+    if(currentKeg.pintsLeft >= 0) {
+      currentKeg.pintsLeft -= 1;
+    }
   }
 
   sellGrowler(currentKeg) {
-    currentKeg.pintsLeft -= 4;
+    if(currentKeg.pintsLeft >= 4) {
+      currentKeg.pintsLeft -= 4;
+    }
   }
 
   showHeader() {
     for(let keg of this.masterKegList) {
-      if(keg.pintsLeft <= 121){
+      if(keg.pintsLeft <= 10){
         this.pintsLow = true;
       }
     }
